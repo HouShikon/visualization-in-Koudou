@@ -8,15 +8,17 @@ public class CSVHelper : MonoBehaviour
 {
     public float timer = 0f;
     public float frequent = 0f;
-    private agent_manager manager;
+    [SerializeField] private string cSVPath;
+    private AgentManager manager;
     private string behavior;
     private Covid covid;
     private Risk risk;
-    
+
+    public string CSVPath { get => cSVPath; set => cSVPath = value; }
+
     private void Awake()
     {
-        manager = transform.GetComponent<agent_manager>();
-        StartCoroutine(CSVRead());
+        CSVPath = "";
     }
 
 
@@ -30,10 +32,16 @@ public class CSVHelper : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.DownArrow))
             this.frequent -= 0.05f;
     }
+    
+    public void StartReadCSV()
+    {
+        manager = transform.GetComponent<AgentManager>();
+        StartCoroutine(CSVRead());
+    }
 
     IEnumerator CSVRead()
     {
-        var reader = new StreamReader(File.OpenRead("Assets/CSV/location.csv"));
+        var reader = new StreamReader(File.OpenRead(CSVPath));
          
         bool isFirst = true;
         while (!reader.EndOfStream)

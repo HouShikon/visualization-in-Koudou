@@ -26,6 +26,20 @@ public class MapManager : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
+       //InitializeMap();
+    }
+    void Start()
+    {
+        
+
+    }
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+    public void InitializeMap()
+    {
         doc.Load(new XmlTextReader("Assets/osm_file/" + mapName));
         XmlNodeList elemList = doc.GetElementsByTagName("node");
         for (int i = 0; i < elemList.Count; i++)
@@ -54,14 +68,14 @@ public class MapManager : MonoBehaviour
         for (int i = 0; i < ways.Count; i++)
         {
             wayObjects.Add(new GameObject("wayObject" + ways[i].id).transform);
-            LineRenderer line=　wayObjects[i].gameObject.AddComponent<LineRenderer>();
+            LineRenderer line = wayObjects[i].gameObject.AddComponent<LineRenderer>();
             Material material = new Material(defult_material);
             line.material = material;
             line.startWidth = 0.04f;
             line.endWidth = 0.04f;
             line.startColor = Color.gray;
             line.startColor = Color.grey;
-            line.positionCount= ways[i].nodes.Count;
+            line.positionCount = ways[i].nodes.Count;
             for (int j = 0; j < ways[i].nodes.Count; j++)
             {
                 foreach (Node nod in nodes)
@@ -74,18 +88,8 @@ public class MapManager : MonoBehaviour
                     }
                 }
                 wayObjects[i].GetComponent<LineRenderer>().SetPosition(j, new Vector3((x - boundsX) * 800, (y - boundsY) * 800));
-                
+
             }
         }
-    }
-    void Start()
-    {
-        
-
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
