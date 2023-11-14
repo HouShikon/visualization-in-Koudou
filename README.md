@@ -9,9 +9,8 @@ And the same OSM file in Koudou
 #### 1.Use mouse to select agent 
 #### 2.Zoom, camera movement  
 #### 3.Agent information panel  
- (1)health status, behavior, location,activity  
- (2)professional*  
- (3)last time moved  
+ (1)Agents' information  
+ (2)professional*   
 #### 4.Summary panel  
  (1)infected agents number through time  
  (2)Numbers of agents in different location  
