@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UniRx;
 using UnityEngine;
 using Random = System.Random;
 
@@ -9,11 +10,15 @@ using Random = System.Random;
 public class Agent : MonoBehaviour
 {
     [SerializeField] private int iD;
+    public ReactiveProperty<int> IDProperty = new ReactiveProperty<int>();
     [SerializeField] private int time;
     [SerializeField] private string activity = "";
+    public ReactiveProperty<string> activityProperty = new ReactiveProperty<string>();
     [SerializeField] private string location = "";
-    [SerializeField] private string  behavior;
+    public ReactiveProperty<string> locationProperty = new ReactiveProperty<string>();
+    [SerializeField] private string  behavior="normal";
     [SerializeField] private Covid covid;
+    
     [SerializeField] private Risk risk;
 
     
@@ -29,6 +34,7 @@ public class Agent : MonoBehaviour
     public string Activity { get => activity; set => activity = value; }
     public string Location { get => location; set => location = value; }
     public string Behavior { get => behavior; set => behavior = value; }
+    
 
     private void Start()
     {
@@ -46,6 +52,8 @@ public class Agent : MonoBehaviour
         this.time = time;
         this.transform.position = new Vector2(lat, lon);
         this.Activity = activity;
+        activityProperty.Value = activity;
+        locationProperty.Value = location;
         this.Behavior = behavior;
         
         this.Location = location;

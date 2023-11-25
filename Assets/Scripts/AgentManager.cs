@@ -47,8 +47,10 @@ public class AgentManager : MonoBehaviour
         for (int i = 0; i < number; i++)
         {
             GameObject agent = Instantiate(agentPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+            
             agent.name = "Agent" + i;
             agent.GetComponent<Agent>().ID = i;
+            agent.GetComponent<Agent>().IDProperty.Value = i;
             agents.Add(agent);
         }
     }
