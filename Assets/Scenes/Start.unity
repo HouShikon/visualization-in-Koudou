@@ -290,6 +290,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac64cbba35eda2644a36979ed500c114, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  InfectionInDoorPrefab: {fileID: 2400865888207703161, guid: f7e10826709229a4c8f6dde5b50fd484, type: 3}
+  InfectionOutDoorPrefab: {fileID: 1235685235986518882, guid: 8d3357b396b13a848bd5d2801953a3fb, type: 3}
 --- !u!4 &161598033
 Transform:
   m_ObjectHideFlags: 0
@@ -764,6 +766,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e0a64ddacaca674294ab0ef0506b0ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  StartButton: {fileID: 0}
+  ChooseButton: {fileID: 0}
+  panel: {fileID: 0}
 --- !u!1 &885595347
 GameObject:
   m_ObjectHideFlags: 0

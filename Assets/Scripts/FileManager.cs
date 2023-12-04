@@ -19,35 +19,7 @@ public class FileManager : MonoBehaviour
     {
         //defaultPath = UnityEngine.Application.dataPath + "/GameAssets/";
     }
-    //private void SelectFolder()
-    //{
-    //    DirectoryInfo mydir = new DirectoryInfo(defaultPath);
-    //    if (!mydir.Exists)
-    //    {
-    //        MessageBox.Show("请先创建资源文件夹");
-    //        return;
-    //    }
-
-    //    try
-    //    {
-    //        FolderBrowserDialog fbd = new FolderBrowserDialog();
-    //        fbd.Description = "选择要打包的资源文件夹";
-    //        fbd.ShowNewFolderButton = false;
-    //        fbd.RootFolder = Environment.SpecialFolder.MyComputer;//设置默认打开路径
-    //        fbd.SelectedPath = defaultPath;  //默认打开路径下的详细路径
-
-    //        if (fbd.ShowDialog() == DialogResult.OK)
-    //        {
-    //            defaultPath = fbd.SelectedPath;
-    //            //selectDir.text = fbd.SelectedPath;
-    //        }
-    //    }
-    //    catch (Exception e)
-    //    {
-    //        Debug.LogError("打开错误：" + e.Message);
-    //        return;
-    //    }
-    //}
+   
 
     public void SelectFile()
     {

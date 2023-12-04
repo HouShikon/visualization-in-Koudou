@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Overlays;
+
 using UnityEngine;
 using System.Xml;
 
@@ -20,6 +20,7 @@ public class MapManager : MonoBehaviour
     private List<Way> ways = new List<Way>();
     private XmlDocument doc = new XmlDocument();
     private List<Transform> wayObjects = new List<Transform>();
+    private string mapPath;
     [SerializeField] private string mapName = "Tx-To-TU.osm";
 
 
@@ -40,7 +41,10 @@ public class MapManager : MonoBehaviour
     }
     public void InitializeMap()
     {
-        doc.Load(new XmlTextReader("Assets/osm_file/" + mapName));
+        //string mapPath= Application.dataPath + "/Tx-To-TU.osm";
+        mapPath = Application.dataPath + "/StreamingAssets/" +mapName;
+        doc.Load(new XmlTextReader(mapPath));
+
         XmlNodeList elemList = doc.GetElementsByTagName("node");
         for (int i = 0; i < elemList.Count; i++)
         {
@@ -87,7 +91,7 @@ public class MapManager : MonoBehaviour
 
                     }
                 }
-                wayObjects[i].GetComponent<LineRenderer>().SetPosition(j, new Vector3((x - boundsX) * 800, (y - boundsY) * 800));
+                wayObjects[i].GetComponent<LineRenderer>().SetPosition(j, new Vector3((y - boundsY) * 800, (x - boundsX) * 800));
 
             }
         }

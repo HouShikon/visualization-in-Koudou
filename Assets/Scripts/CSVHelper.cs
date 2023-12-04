@@ -13,12 +13,22 @@ public class CSVHelper : MonoBehaviour
     private string behavior;
     private Covid covid;
     private Risk risk;
-
+    private Dictionary<string,Covid> covidDict=new Dictionary<string, Covid>();
+    private Dictionary<string, Risk> riskDict=new Dictionary<string, Risk>();
     public string CSVPath { get => cSVPath; set => cSVPath = value; }
 
     private void Awake()
     {
-        CSVPath = "";
+        //CSVPath = "";
+        covidDict.Add("asy",Covid.asymptomatic );
+        covidDict.Add("sus",Covid.susceptible );
+        covidDict.Add("exp",Covid.exposed);
+        covidDict.Add("sym",Covid.symptomatic );
+        covidDict.Add("rec", Covid.recovered);
+        covidDict.Add("sev", Covid.severe);
+        riskDict.Add("L", Risk.Low);
+        riskDict.Add("M",Risk.Medium);
+        riskDict.Add ("H", Risk.High);
     }
 
 
@@ -50,13 +60,11 @@ public class CSVHelper : MonoBehaviour
             var values = line.Split(',');
             if (isFirst)
             {
-                int number = int.Parse(values[9]);
+                int number = int.Parse(values[10]);
                 manager.CreateAgents(number);
                 isFirst = false;
                 continue;
             }
-
-
             int time = int.Parse(values[0]);
             int id = int.Parse(values[1]);
             float lat = (float.Parse(values[2]) - 36) * 800;
@@ -67,36 +75,20 @@ public class CSVHelper : MonoBehaviour
                 behavior = "normal";
             else if (values[5] == "e")
                 behavior = "evacuate";
-            
-            
-            if (values[6] == "sus")
-                covid = Covid.susceptible;
-            else if (values[6] == "exp")
-                covid = Covid.exposed;
-            else if (values[6] == "asy")
-                covid = Covid.asymptomatic;
-            else if (values[6] == "rec")
-                covid = Covid.recovered;
-            else if (values[6] == "sym")
-                covid = Covid.symptomatic;
-            else if (values[6] == "sev")
-                covid = Covid.severe;
+
+
+            covid = covidDict[values[6]];
 
             string location = values[7];
-            if (values[8] == "H")
-                risk = Risk.High;
-            else if (values[8] == "L")
-                risk = Risk.Low ;
-            else if (values[8] == "M")
-                risk = Risk.Medium;
-            //Debug.Log(id+"  "+lat+", "+lon);
+            risk = riskDict[values[9]];
+            string profession= values[8];
             if (manager.TimeStep != time)
             {
                 yield return new WaitForSeconds(frequent);
                 //transform.GetComponent<agent_manager>().agents[id].GetComponent<Agent>().Set_lat_lon(lat, lon);
                 manager.TimeStep = time;
             }
-            manager.UpdateAgentInformation(id, lat, lon, time, activity, behavior, covid, location, risk);
+            manager.UpdateAgentInformation(  lat, lon, id, time, activity,  location, behavior, profession , covid,risk);
 
 
 

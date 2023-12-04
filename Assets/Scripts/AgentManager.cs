@@ -15,6 +15,7 @@ public class AgentManager : MonoBehaviour
     [SerializeField] private int timeStep=-1;
     public GameObject agentPrefab;
     public  List<GameObject> agents = new List<GameObject>();
+    private GameObject Agents;
     
 
     public int TimeStep { get => timeStep; set => timeStep = value; }
@@ -26,8 +27,8 @@ public class AgentManager : MonoBehaviour
     }
     void Start()
     {
-        
 
+        
         
     }
 
@@ -42,7 +43,7 @@ public class AgentManager : MonoBehaviour
     }
     public void CreateAgents(int number)
     {
-
+        Agents = GameObject.Find("Agents");
         this.number = number;
         for (int i = 0; i < number; i++)
         {
@@ -50,13 +51,13 @@ public class AgentManager : MonoBehaviour
             
             agent.name = "Agent" + i;
             agent.GetComponent<Agent>().ID = i;
-            agent.GetComponent<Agent>().IDProperty.Value = i;
+            agent.transform.parent = Agents.transform;
             agents.Add(agent);
         }
     }
-    public void UpdateAgentInformation(int id,float lat,float lon,int time, string activity, string behavior, Covid health, string location, Risk risk)
+    public void UpdateAgentInformation(float lat, float lon, int iD, int time, string activity, string location, string behavior, string profession, Covid covid, Risk risk)
     {
-        agents[id].GetComponent<Agent>().SetInformation(lat, lon,time,activity,behavior,health,location,risk);
+        agents[iD].GetComponent<Agent>().SetInformation(lat, lon, iD, time, activity, location, behavior, profession, covid, risk);
     }
     public void CheckAgents()
     {
